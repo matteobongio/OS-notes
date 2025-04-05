@@ -81,14 +81,56 @@ processes to synchronize their activities
 *Monitors*: A high-level abstraction that provides a convenient
 and effective mechanism for process synchronization
 
+= Lecture 6 Virtual Memory
 
-#pagebreak()
-=
+Virtual memory involves the separation of logical memory as perceived by 
+developers from physical memory.
+
+*Page Fault*: when a page is referenced but not present.
+
+*Thrashing*: pages are exchanged in and out of main memory too frequently. A process does not
+have enough frames, so there are many page faults.
 
 *Working Set Model*: Paging algorithm, for each program look at how many 
 unique pages it used in the past $Delta$ time, allocate that many frames for that program.
 
-*Thrashing*: pages are exchanged in and out of main memory too frequently.
+= Lecture 7 File Systems management
+
+*inodes*: file metadata
+
+*Directory*: table of names to inodes
+
+*Hard Link*: when an inode is cited multiple times
+
+= Lecture 8 File Systems management
+
+*Block allocation*:
+- Contuguous allocation
+- Linked allocation
+- Indexed allocation
+
+*Soft Links*: contains a path to a file
+
+*Boot Block*: located in the first few sectors of a file system, contains the bootstrap
+used to load the OS
+
+*Super Block*: stores the state of the file system
+
+*Free Space Management*: usually a bitmap to show free disk blocks
+
+*Block Group*: subdivision of the partition, contains a block bitmap that, an inode bitmap,
+and an inode table.
+
+*Journaling*: technique used to ensure the integrity of the file system by keeping track of 
+changes before they are applied
+
+
+
+
+
+#pagebreak()
+=
+
 
 *Interrupt Vector*: a table that holds a ptr to every interrupt service routine.
 (kind of like how trap works)
