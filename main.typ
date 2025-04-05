@@ -9,6 +9,41 @@
    *#title*
 ])
 
+= Lecture 1
+
+*Spooling*: when using slow devices, files sent are saved in a queue on a drive.
+
+*Multiprogramming*: running processes simultaneously, rapid switching between processes.
+
+*timesharing*: Each program has runs until it's waiting for IO, or when it's assigned time is over.
+
+
+= Lecture 2 Processes and Threads
+
+*Process*: program in execution
+
+*Program*: executable file stored on disk
+
+*Context Switching*: when switching processes, copy the current values of registers,
+flags, PC, etc., and load valuess of the next process.
+
+it works by having a timer generate interrupts, where it checks if it s time for context switching
+
+*Process Control Block (PCB)*: used by OS to store the statues of each process (incl. values of
+registers, PC, etc.)
+
+*Process Table*: a list of PCBs
+
+*Thread*: light-weight process, a lot is shared between threads.
+
+*Kernel-level Threads* 
+
+*User-level Threads*: implemented by programing languages, kernel is not aware.
+
+*Thread pool*: make a bunch of threads at start-up, and they wait for work.
+
+
+
 *Working Set Model*: Paging algorithm, for each program look at how many 
 unique pages it used in the past $Delta$ time, allocate that many frames for that program.
 
