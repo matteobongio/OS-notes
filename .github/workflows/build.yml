@@ -18,6 +18,6 @@ jobs:
       # go to settings, action, set to read/write
       - uses: svenstaro/upload-release-action@v2
         with:
-          release_name: "ML - Matteo Notes"
+          release_name: "OS - Matteo Notes"
           file: main.pdf
           overwrite: true
