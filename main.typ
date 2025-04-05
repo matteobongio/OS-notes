@@ -43,6 +43,47 @@ registers, PC, etc.)
 *Thread pool*: make a bunch of threads at start-up, and they wait for work.
 
 
+= Lecture 3 Process Scheduling
+
+Which scheduling algorithm provides the lowest average waiting time? 
+
+Shortest Remaining Time First
+
+*Starvation problem*: when a process waits a long time for a resource
+
+= Lecture 4: Inter Process Communications
+
+*Shared memory*
+
+*Messege passing*: pass messages through the kernel
+
+*Race Condition*: when processes or threads can access a _shared data_ concurrently,
+and at least one is a write access
+
+*Requirements to avoid race conditions*:
++ No two processes may be simultaneously inside their critical regions. (_Mutual Exclusion_)
++ No assumptions may be made about speeds or the number of CPUs.
++ No process running outside its critical region may block other processes.
++ No process should have to wait forever to enter its critical region. (_Starvation_)
+
+*Test and Set Lock*: reads the memory, and stores a nonzero value
+
+$
+cases(
+0 => "resource is free",
+"else" => "resource has already been taken"
+)
+$
+
+*Semaphore*: Synchronization tool that provides more sophisticated ways for
+processes to synchronize their activities
+
+*Monitors*: A high-level abstraction that provides a convenient
+and effective mechanism for process synchronization
+
+
+#pagebreak()
+=
 
 *Working Set Model*: Paging algorithm, for each program look at how many 
 unique pages it used in the past $Delta$ time, allocate that many frames for that program.
