@@ -171,7 +171,73 @@ internal state onto the stack, they are slow and complicated
 
 *Watchdog Timer*: detects hangs
 
-= Lecture 10
+= Lecture 10 IO
+
+- Seek Time (S): The time needed for the head to move onto the track
+- Rotational Latency Time (r): The time needed for the disk to rotate until the sector comes under the head
+- Block Transfer Time (btt): The time needed to transfer data from head to sector (write) or sector to head (read)
+
+*Cylinder skew*: a concept used in HDDs to improve performance  during sequential data access. 
+It is an intentional offset of the starting vectors of adjacent tracks, to account for the 
+time it takes the head to move.
+
+*RAID*
+0. _Striping_, data is split into strips and spread accross multiple drives, for speed.
+1. _Mirroring_, data is mirrored on several disks, so that if 1 fails, there is always a backup
+5. _Striping with parity_, a mix of both 0 and 1, requires at least 3 drives
+// 6. _Striping with double parity_, RAID 5 but with 2 parity drives, needs at least 4 drives
+10. _Mirrored striping_ litteraly just applying RAID 0 and RAID 1, needs at least 4 drives
+
+*RAID 6 vs RAID 10?*
+
+good question, RAID 10 is faster, but RAID 6 has better storage efficiency
+
+*Shortest Seek Time First*: disk scheduling algorithm, chooses the IO operation closest to where it is.
+
+*Elevator (SCAN)*: The disk arm starts at one end of the disk, and
+moves toward the other end, servicing requests
+until it gets to the other end of the disk, where the head movement is reversed.
+
+= Lecture 11 Deadlocks
+
+Strategies used for dealing with deadlocks:
+1. _Ignore_ the problem, maybe it will go away
+2. _Detection and recovery_. Let deadlocks occur, detect them, and take action
+3. _Dynamic avoidance_ by careful resource allocation
+4. _Prevention_, by structurally negating one of the four required conditions
+
+A state is said to be safe if there is some scheduling order in which every process can run to
+completion even if all of them suddenly request their maximum number of resources immediately.
+
+*Banker's Algorithm*
+
+#link("https://www.geeksforgeeks.org/bankers-algorithm-in-operating-system-2/")
+
+*Deadlock prevention*
+Assure that at least one of the conditions is never satisfied
+- Mutual exclusion
+- Hold and wait (two-phase locking), try to lock all resources at the beginning until u can, then use them, then free them
+- No Preemption
+- Circular wait, implse an order of requests for all resources
+
+= Lecture 12 Virtualization
+
+*Requirements for Virtualization*
+1. Saftey
+2. Fidelity
+3. Efficiency
+
+Sensitive Instructions: behave differently: user mode vs kernel mode.
+
+Privileged Instructions: Cause a trap if executed in user mode
+
+*Type 1 hypervisor*: high performance, runs OSes side by side
+
+*Type 2 hypervisor*: performance overhead, it is a host OS process
+
+*Paravirtualization*: when the guest OS knows there is a hypervisor, and makes call explicitly to the hypervisor.
+
+
 
 
 #pagebreak()
@@ -179,23 +245,6 @@ internal state onto the stack, they are slow and complicated
 
 
 
-*Cylinder skew*: a concept used in HDDs to improve performance  during sequential data access. 
-It is an intentional offset of the starting vectors of adjacent tracks, to account for the 
-time it takes the head to move.
-
-*Shortest Seek Time First*: disk scheduling algorithm, chooses the IO operation 
-closest to where it is.
 
 *Passive attack*: an attack without modifying data, only reading. Eavesdropping.
 
-*RAID*
-
-0. _Striping_, data is split into strips and spread accross multiple drives, for speed.
-1. _Mirroring_, data is mirrored on several disks, so that if 1 fails, there is always a backup
-5. _Striping with parity_, a mix of both 0 and 1, requires at least 3 drives
-6. _Striping with double parity_, RAID 5 but with 2 parity drives, needs at least 4 drives
-10. _Mirrored striping_ litteraly just applying RAID 0 and RAID 1, needs at least 4 drives
-
-*RAID 6 vs RAID 10?*
-
-good question, RAID 10 is faster, but RAID 6 has better storage efficiency
