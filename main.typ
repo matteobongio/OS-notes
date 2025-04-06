@@ -124,16 +124,60 @@ and an inode table.
 *Journaling*: technique used to ensure the integrity of the file system by keeping track of 
 changes before they are applied
 
+= Lecture 9 IO
 
+*Memory Mapped IO*: each device controller has some registers for commucating with the CPU
+we assign fake memory addresses to each register
 
+Pros:
+- Special IO instructions are needed to use the device registers, which are not available in all languages, but using addresses is simple.
+- No status check needed, so faster IO operations
+Cons:
+- Caching the page of a device control register is very bad
+
+*Direct Memory Access (DMA)*: DMA controller can use the system bus independent of the CPU,
+it gets orders from the CPU, then executes them. It is slower than the CPU.
+
+*Accessing BUS*: many buses can operate in 2 modes, _word-at-a-time_ and _block_.
+
+In _word-at-a-time_ the DMA controller requests 1 word, called *cycle stealing* because it steals
+an occasional bus cycle from the CPU.
+
+In _block_ mode the DMA controller gets the bus, does a sereis of transfers then releases the
+bus, called *burst mode*
+
+*fly-by mode*: the DMA controller transfers the data directly to main memory.
+
+*Interrupt Vector*: a table that holds a ptr to every interrupt service routine.
+(kind of like how trap works)
+
+*Precise interrupts*: leaves the machine in a well-defined state, 4 properties:
++ The PC is saved in a known place.
++ All instructions before the one pointed to by the PC have completed.
++ No instruction beyond the one pointed to by the PC has finished.
++ The execution state of the instruction pointed to by the PC is known.
+
+*Imprecise Interrupts*: does not meet the four requirements, requires pushing a large amount of
+internal state onto the stack, they are slow and complicated
+
+*Buffers*: 
+- If IO device is slow, the process can use a buffer, but the memory page cannot be paged out, so there is less pages for other processes which degrades performance
+- Solution: *double buffering*, create a buffer in the kernel, for the interrupt handler, then when it s full, copy to user buffer.
+
+*Hardware Clocks*
+- current time
+- elapsed time
+- trigger operation
+
+*Watchdog Timer*: detects hangs
+
+= Lecture 10
 
 
 #pagebreak()
 =
 
 
-*Interrupt Vector*: a table that holds a ptr to every interrupt service routine.
-(kind of like how trap works)
 
 *Cylinder skew*: a concept used in HDDs to improve performance  during sequential data access. 
 It is an intentional offset of the starting vectors of adjacent tracks, to account for the 
